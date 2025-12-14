@@ -21,9 +21,32 @@ function App() {
     },
   ]);
 
+  let [inputText, setInputText] = useState("");
+
+  function handleSendMessage() {
+    setChatMessages([
+      ...chatMessages,
+      {
+        message: "How can I help you?",
+        sender: "user",
+        id: crypto.randomUUID(),
+      },
+    ]);
+  }
+
+  function saveInputText(event) {
+    setInputText(event.target.value);
+  }
+
   return (
     <>
-      <ChatInput />
+      <input
+        type="text"
+        placeholder="Send a message to Chatbot"
+        size="50"
+        onChange={saveInputText}
+      />{" "}
+      <button>Send</button>
       {chatMessages.map((chatMessage) => {
         return (
           <ChatMessage
